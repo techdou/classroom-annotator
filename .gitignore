@@ -1,0 +1,68 @@
+# ---------- 私密信息与密钥（最高优先级，绝不入库） ----------
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+*.pfx
+*secret*
+*credential*
+secrets/
+credentials/
+
+# ---------- 开发软件配置目录（不入库） ----------
+.vscode/
+.idea/
+.cursor/
+.zed/
+*.code-workspace
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---------- 内部文档与开发状态（不纳入版本控制） ----------
+docs/
+notes/
+*.note.md
+TODO.md
+PROGRESS.md
+CHANGELOG.local.md
+首测报告*.md
+评测报告*.md
+*内部*.md
+
+# ---------- Python ----------
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+
+# ---------- 日志与临时文件 ----------
+*.log
+*.tmp
+*.bak
+tmp/
+temp/
+.cache/
+
+# ---------- 课堂数据与流水线产出物（隐私 + 体积，均不入库） ----------
+# 每节课一个目录的运行结构：视频/音频、抽帧、转录、VLM 中间件、LLM 任务包、导出草稿
+*.mp4
+*.mov
+*.mkv
+*.avi
+*.mp3
+*.wav
+*.m4a
+*.flac
+*.xlsx
+frames/
+transcripts/
+vlm/
+llm/
+draft/
+标注方案.docx

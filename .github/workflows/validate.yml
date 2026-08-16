@@ -1,0 +1,40 @@
+name: Validate Skill
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Check SKILL.md frontmatter
+        run: |
+          python - <<'EOF'
+          import re, sys
+          text = open("SKILL.md", encoding="utf-8").read()
+          m = re.match(r"^---\n(.*?)\n---\n", text, re.S)
+          if not m:
+              sys.exit("SKILL.md missing YAML frontmatter")
+          fm = m.group(1)
+          for field in ("name:", "description:"):
+              if field not in fm:
+                  sys.exit(f"SKILL.md frontmatter missing {field}")
+          if "name: classroom-annotator" not in fm:
+              sys.exit("frontmatter name must be classroom-annotator")
+          print("frontmatter OK")
+          EOF
+
+      - name: Compile bundled scripts
+        run: python -m py_compile scripts/*.py

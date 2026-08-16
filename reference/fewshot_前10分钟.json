@@ -1,0 +1,533 @@
+{
+ "operations": [
+  {
+   "id": "M00001",
+   "behavior_id": "B0001",
+   "start": 0,
+   "end": 58,
+   "org": "教师面向全体学生",
+   "op_type": "巡视",
+   "tool": "其他",
+   "evidence_v": "女教师从教室前方走入学生座位间，巡视学生独立完成任务的情况。",
+   "evidence_r": ""
+  },
+  {
+   "id": "M00002",
+   "behavior_id": "B0001",
+   "start": 58,
+   "end": 63,
+   "org": "教师面向全体学生",
+   "op_type": "讲述",
+   "tool": "口头语言",
+   "evidence_v": "女教师告知时间结束，同学们可相互交流。",
+   "evidence_r": ""
+  },
+  {
+   "id": "M00003",
+   "behavior_id": "B0001",
+   "start": 63,
+   "end": 91,
+   "org": "个体学生面向小组",
+   "op_type": "巡视",
+   "tool": "口头语言",
+   "evidence_v": "学生相互交流讨论。",
+   "evidence_r": ""
+  },
+  {
+   "id": "M00004",
+   "behavior_id": "B0002",
+   "start": 91,
+   "end": 94,
+   "org": "教师面向全体学生",
+   "op_type": "使用",
+   "tool": "白板内置软件工具",
+   "evidence_v": "女教师在讲台前操作电子白板/计时器界面，同时面向学生。",
+   "evidence_r": ""
+  },
+  {
+   "id": "M00005",
+   "behavior_id": "B0002",
+   "start": 94,
+   "end": 96,
+   "org": "教师面向全体学生",
+   "op_type": "使用",
+   "tool": "PPT",
+   "evidence_v": "女教师点击切换到PPT课件，屏幕显示澳大利亚相关地图。",
+   "evidence_r": ""
+  },
+  {
+   "id": "M00006",
+   "behavior_id": "B0002",
+   "start": 96,
+   "end": 104,
+   "org": "教师面向全体学生",
+   "op_type": "讲述",
+   "tool": "PPT",
+   "evidence_v": "女教师向学生提问。",
+   "evidence_r": "有没有同学给大家介绍一下为什么？一样能够在澳大利亚生存。"
+  },
+  {
+   "id": "M00007",
+   "behavior_id": "B0002",
+   "start": 104,
+   "end": 111,
+   "org": "个体学生面向全班",
+   "op_type": "讲述",
+   "tool": "PPT",
+   "evidence_v": "女教师转向黑板，在\"生存\"旁补充板书内容。",
+   "evidence_r": "嗯，首先我找到的是82亿。他说，澳大利亚是大洋洲面积最大的国家"
+  },
+  {
+   "id": "M00008",
+   "behavior_id": "B0003",
+   "start": 111,
+   "end": 121,
+   "org": "教师面向全体学生",
+   "op_type": "讲述",
+   "tool": "口头语言",
+   "evidence_v": "女教师给予学生肯定，同时请别人回答。",
+   "evidence_r": "还有吗？哎，好请坐，它是这个角度答的，不错的角度"
+  },
+  {
+   "id": "M00009",
+   "behavior_id": "B0003",
+   "start": 121,
+   "end": 135,
+   "org": "个体学生面向全班",
+   "op_type": "讲述",
+   "tool": "口头语言",
+   "evidence_v": "在旁观察其回答/展示。",
+   "evidence_r": "我认为还有那个澳大利亚，然后缺少大型食肉动物，然后种种族稳定，然后哦，地势较低，然后地起伏和缓"
+  },
+  {
+   "id": "M00010",
+   "behavior_id": "B0004",
+   "start": 135,
+   "end": 142,
+   "org": "教师面向全体学生",
+   "op_type": "讲述",
+   "tool": "口头语言",
+   "evidence_v": "女教师在黑板前讲解，面向全班。",
+   "evidence_r": "一下输出量有点太大了啊，大家帮着归纳一下他从哪些角度说的"
+  },
+  {
+   "id": "M00011",
+   "behavior_id": "B0004",
+   "start": 142,
+   "end": 144,
+   "org": "教师面向全体学生",
+   "op_type": "书写",
+   "tool": "板书",
+   "evidence_v": "女教师根据学生回答在黑板上补充板书，完善知识结构。",
+   "evidence_r": ""
+  },
+  {
+   "id": "M00012",
+   "behavior_id": "B0004",
+   "start": 146,
+   "end": 151,
+   "org": "教师面向全体学生",
+   "op_type": "讲述",
+   "tool": "口头语言",
+   "evidence_v": "女教师面向全班讲解，结合板书内容。",
+   "evidence_r": ""
+  },
+  {
+   "id": "M00013",
+   "behavior_id": "B0004",
+   "start": 151,
+   "end": 166,
+   "org": "个体学生面向全班",
+   "op_type": "讲述",
+   "tool": "口头语言",
+   "evidence_v": "学生持续起立回答，女教师倾听并观察",
+   "evidence_r": "澳大利亚与其他大陆相距较远。"
+  },
+  {
+   "id": "M00014",
+   "behavior_id": "B0005",
+   "start": 166,
+   "end": 175,
+   "org": "教师面向全体学生",
+   "op_type": "讲述",
+   "tool": "口头语言",
+   "evidence_v": "女教师在黑板前讲解，手势丰富，与全班互动。",
+   "evidence_r": "有没有同学还有补充"
+  },
+  {
+   "id": "M00015",
+   "behavior_id": "B0005",
+   "start": 175,
+   "end": 183,
+   "org": "个体学生面向全班",
+   "op_type": "讲述",
+   "tool": "口头语言",
+   "evidence_v": "学生起立回答，女教师在教室右侧观察倾听。",
+   "evidence_r": "澳大利亚。对于热带和亚降降水多，然后有利于多支木和。"
+  },
+  {
+   "id": "M00016",
+   "behavior_id": "B0006",
+   "start": 183,
+   "end": 198,
+   "org": "教师面向全体学生",
+   "op_type": "观察",
+   "tool": "口头语言",
+   "evidence_v": "女教师引导学生补充。",
+   "evidence_r": "还有吗"
+  },
+  {
+   "id": "M00017",
+   "behavior_id": "B0006",
+   "start": 198,
+   "end": 204,
+   "org": "教师面向全体学生",
+   "op_type": "书写",
+   "tool": "板书",
+   "evidence_v": "女教师在黑板前书写，补充“生存”分支下的板书内容",
+   "evidence_r": ""
+  },
+  {
+   "id": "M00018",
+   "behavior_id": "B0006",
+   "start": 204,
+   "end": 219,
+   "org": "教师面向全体学生",
+   "op_type": "讲述",
+   "tool": "PPT",
+   "evidence_v": "女教师在黑板前书写，补充“生存”分支下的板书内容",
+   "evidence_r": "我们注意湿润这个词可是什么？啊，那也就是说，主要是气候比较。温气温比较高，是不是气候比较温暖啊？还有别的角度吗？"
+  },
+  {
+   "id": "M00019",
+   "behavior_id": "B0006",
+   "start": 219,
+   "end": 236,
+   "org": "个体学生面向全班",
+   "op_type": "讲述",
+   "tool": "口头语言",
+   "evidence_v": "学生回答",
+   "evidence_r": "沿海地区比较湿润"
+  },
+  {
+   "id": "M00020",
+   "behavior_id": "B0007",
+   "start": 236,
+   "end": 249,
+   "org": "教师面向全体学生",
+   "op_type": "巡视",
+   "tool": "口头语言",
+   "evidence_v": "教师离开讲台，在教室过道中穿行",
+   "evidence_r": ""
+  },
+  {
+   "id": "M00021",
+   "behavior_id": "B0007",
+   "start": 249,
+   "end": 263,
+   "org": "教师面向全体学生",
+   "op_type": "讲述",
+   "tool": "口头语言",
+   "evidence_v": "教师离开讲台，在教室过道中穿行",
+   "evidence_r": "你想想羊得吃草呢是吧？那这个啥喝水，然后又悄悄的说了个问题，喝水了水那它。哎，哪里有地下水了？大家共同捋清楚了他生存的这些条件。没有问题，其实这个除了地下水以外"
+  },
+  {
+   "id": "M00022",
+   "behavior_id": "B0007",
+   "start": 263,
+   "end": 291,
+   "org": "教师面向全体学生",
+   "op_type": "讲述",
+   "tool": "口头语言",
+   "evidence_v": "回到讲台，继续讲解。",
+   "evidence_r": "那综上所述，它有利于有利于它的生存，对不对啊那？现在他是不是说每只羊均匀的放入在每头去？"
+  },
+  {
+   "id": "M00023",
+   "behavior_id": "B0008",
+   "start": 291,
+   "end": 310,
+   "org": "教师面向全体学生",
+   "op_type": "讲述",
+   "tool": "口头语言",
+   "evidence_v": "安排任务。",
+   "evidence_r": "现在我们来看一下他们之间存在什么样的？看学习标材任务二给了大家补充的图文。资料需要大家持有交流完成，下面的表格。记录交流的答案"
+  },
+  {
+   "id": "M00024",
+   "behavior_id": "B0008",
+   "start": 310,
+   "end": 338,
+   "org": "教师面向全体学生",
+   "op_type": "巡视",
+   "tool": "其他",
+   "evidence_v": "巡视指导。",
+   "evidence_r": ""
+  },
+  {
+   "id": "M00025",
+   "behavior_id": "B0008",
+   "start": 338,
+   "end": 342,
+   "org": "教师面向全体学生",
+   "op_type": "讲述",
+   "tool": "口头语言",
+   "evidence_v": "教师点击/触控大屏幕。",
+   "evidence_r": ""
+  },
+  {
+   "id": "M00026",
+   "behavior_id": "B0008",
+   "start": 342,
+   "end": 426,
+   "org": "教师面向全体学生",
+   "op_type": "讲述",
+   "tool": "PPT",
+   "evidence_v": "回到讲台看PPT。",
+   "evidence_r": ""
+  },
+  {
+   "id": "M00027",
+   "behavior_id": "B0009",
+   "start": 426,
+   "end": 438,
+   "org": "教师面向个体学生",
+   "op_type": "讲述",
+   "tool": "口头语言",
+   "evidence_v": "喊男同学上台",
+   "evidence_r": "来，你说一下。上来给大家介绍一下吧"
+  },
+  {
+   "id": "M00028",
+   "behavior_id": "B0009",
+   "start": 438,
+   "end": 485,
+   "org": "学生面向学生",
+   "op_type": "指向",
+   "tool": "口头语言",
+   "evidence_v": "一名男生学生在讲台前面向全体同学，用手指向PPT上的农牧业数据表格进行讲解汇报；教师站在教室侧后方或走动巡视，观察学生表现及全班反应",
+   "evidence_r": "我觉得我觉得啊，牧场三的话，我觉得它的它的植被密度应该植被应该是a，因为的话它降。因为它的年降水量较小，所以的话它的它的呃草草生长的就越少。然后的话，第二个的话"
+  },
+  {
+   "id": "M00029",
+   "behavior_id": "B0009",
+   "start": 485,
+   "end": 491,
+   "org": "教师面向全体学生",
+   "op_type": "讲述",
+   "tool": "口头语言",
+   "evidence_v": "教师给予肯定，并跟他说继续。",
+   "evidence_r": "首先大家同意他答案不，并且他说的原因，大家听懂没哎，听懂就说明人家的逻辑性很好啊，不错。好，那继续生产方式"
+  },
+  {
+   "id": "M00030",
+   "behavior_id": "B0010",
+   "start": 491,
+   "end": 541,
+   "org": "学生面向学生",
+   "op_type": "指向",
+   "tool": "口头语言",
+   "evidence_v": "一名男生学生在讲台前面向全体同学，用手指向PPT上的农牧业数据表格进行讲解汇报；教师站在教室侧后方或走动巡视，观察学生表现及全班反应",
+   "evidence_r": "我觉得的商用场的看它的看它的面积公形应呃也应该是粗放型，因为的话它的面积是。是一是三个牧场里面面积公顷最最多的，所以的话我觉得应该是粗放型，然后第二个的话我觉得"
+  },
+  {
+   "id": "M00031",
+   "behavior_id": "B0011",
+   "start": 541,
+   "end": 548,
+   "org": "教师面向全体学生",
+   "op_type": "讲述",
+   "tool": "口头语言",
+   "evidence_v": "教师询问其他学生",
+   "evidence_r": "大家同意他的答案吗？都同意？"
+  },
+  {
+   "id": "M00032",
+   "behavior_id": "B0011",
+   "start": 548,
+   "end": 565,
+   "org": "学生面向学生",
+   "op_type": "讲述",
+   "tool": "口头语言",
+   "evidence_v": "另一个学生回答",
+   "evidence_r": "就是第一个一场比较大，"
+  },
+  {
+   "id": "M00033",
+   "behavior_id": "B0011",
+   "start": 565,
+   "end": 567,
+   "org": "教师面向全体学生",
+   "op_type": "讲述",
+   "tool": "口头语言",
+   "evidence_v": "教师询问",
+   "evidence_r": "你觉得二跟一谁更挤？"
+  },
+  {
+   "id": "M00034",
+   "behavior_id": "B0011",
+   "start": 567,
+   "end": 568,
+   "org": "学生面向学生",
+   "op_type": "讲述",
+   "tool": "口头语言",
+   "evidence_v": "学生回答",
+   "evidence_r": ""
+  },
+  {
+   "id": "M00035",
+   "behavior_id": "B0012",
+   "start": 568,
+   "end": 588,
+   "org": "教师面向全体学生",
+   "op_type": "讲述",
+   "tool": "口头语言",
+   "evidence_v": "教师回到讲台",
+   "evidence_r": "那其实这两个是大家没有注意的，只是这个过渡型的，我们把它可以这样来理解啊，我们可以说它是半紧约型。"
+  },
+  {
+   "id": "M00036",
+   "behavior_id": "B0012",
+   "start": 588,
+   "end": 591,
+   "org": "教师面向全体学生",
+   "op_type": "讲述",
+   "tool": "板书",
+   "evidence_v": "教师站在电子黑板前面向全体学生，补充板书",
+   "evidence_r": ""
+  },
+  {
+   "id": "M00037",
+   "behavior_id": "B0012",
+   "start": 591,
+   "end": 608,
+   "org": "教师面向全体学生",
+   "op_type": "讲述",
+   "tool": "口头语言",
+   "evidence_v": "教师询问",
+   "evidence_r": "那现在我想问大家。那你觉得它的生产方式以及它的植被主要是谁影响你教育？是不是降税影响的哎"
+  }
+ ],
+ "behaviors": [
+  {
+   "id": "B0001",
+   "activity_id": "A0001",
+   "start": 0,
+   "end": 91,
+   "behavior_type": "诱发学习行为/引出行为",
+   "object_desc": "围绕“羊为什么能在澳大利亚生存”的前置任务完成独立思考与同伴交流，为后续汇报形成初步判断。",
+   "object_code": "AN-CK",
+   "community": "师生共同体-全班学生"
+  },
+  {
+   "id": "B0002",
+   "activity_id": "A0001",
+   "start": 91,
+   "end": 111,
+   "behavior_type": "诱发学习行为/引出行为",
+   "object_desc": "围绕“羊为什么能在澳大利亚生存”进行首轮汇报，依据课件材料说明相关区位或自然条件。",
+   "object_code": "AN-CK",
+   "community": "师生共同体-全班学生"
+  },
+  {
+   "id": "B0003",
+   "activity_id": "A0001",
+   "start": 111,
+   "end": 135,
+   "behavior_type": "诱发学习行为/引出行为",
+   "object_desc": "在教师肯定与追问基础上继续补充缺少大型食肉动物、地势等羊生存条件。",
+   "object_code": "AN-CK",
+   "community": "师生共同体-全班学生"
+  },
+  {
+   "id": "B0004",
+   "activity_id": "A0001",
+   "start": 135,
+   "end": 166,
+   "behavior_type": "提供学习指导",
+   "object_desc": "将学生较分散的回答归纳为分析角度，并补充澳大利亚与其他大陆相距较远等区位因素。",
+   "object_code": "AN-CK",
+   "community": "师生共同体-全班学生"
+  },
+  {
+   "id": "B0005",
+   "activity_id": "A0001",
+   "start": 166,
+   "end": 183,
+   "behavior_type": "诱发学习行为/引出行为",
+   "object_desc": "继续征集并补充气候、降水等有利于羊生存的自然条件。",
+   "object_code": "AN-CK",
+   "community": "师生共同体-全班学生"
+  },
+  {
+   "id": "B0006",
+   "activity_id": "A0001",
+   "start": 183,
+   "end": 236,
+   "behavior_type": "提供学习指导",
+   "object_desc": "通过追问和解释辨析“湿润、温暖”等气候条件，并联系沿海地区湿润特征完善判断。",
+   "object_code": "UN-CK",
+   "community": "师生共同体-全班学生"
+  },
+  {
+   "id": "B0007",
+   "activity_id": "A0001",
+   "start": 236,
+   "end": 291,
+   "behavior_type": "提供学习指导",
+   "object_desc": "从草场、水源、地下水和河流等方面系统归纳羊在澳大利亚生存所需条件。",
+   "object_code": "AN-CK",
+   "community": "教师-全班学生"
+  },
+  {
+   "id": "B0008",
+   "activity_id": "A0002",
+   "start": 291,
+   "end": 426,
+   "behavior_type": "诱发学习行为/引出行为",
+   "object_desc": "布置任务二并组织学生依据补充图文资料比较三个牧场、完成表格记录。",
+   "object_code": "AN-CK",
+   "community": "师生共同体-全班学生"
+  },
+  {
+   "id": "B0009",
+   "activity_id": "A0002",
+   "start": 426,
+   "end": 491,
+   "behavior_type": "诱发学习行为/引出行为",
+   "object_desc": "学生汇报三个牧场降水量与植被密度的比较结果及理由，教师组织核对并给予反馈。",
+   "object_code": "AN-CK",
+   "community": "师生共同体-全班学生"
+  },
+  {
+   "id": "B0010",
+   "activity_id": "A0002",
+   "start": 491,
+   "end": 541,
+   "behavior_type": "诱发学习行为/引出行为",
+   "object_desc": "依据牧场面积和养羊数量判断不同牧场的生产方式及集约程度。",
+   "object_code": "AN-CK",
+   "community": "个体学生-全班学生"
+  },
+  {
+   "id": "B0011",
+   "activity_id": "A0002",
+   "start": 541,
+   "end": 568,
+   "behavior_type": "诱发学习行为/引出行为",
+   "object_desc": "通过全班判断与比较性追问辨别一号、二号牧场的生产强度和集约程度。",
+   "object_code": "AN-CK",
+   "community": "师生共同体-全班学生"
+  },
+  {
+   "id": "B0012",
+   "activity_id": "A0002",
+   "start": 568,
+   "end": 630,
+   "behavior_type": "提供学习指导",
+   "object_desc": "纠正并补充“半集约型”等概念，建立“降水—植被—生产方式”之间的关系。",
+   "object_code": "UN-CK",
+   "community": "教师-全班学生"
+  }
+ ]
+}
