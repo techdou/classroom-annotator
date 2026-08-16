@@ -62,7 +62,7 @@ def report(name, gold, auto, type_col, type_norm=None):
              f"- 类型一致 {matched}/{covered} = {matched/max(covered,1)*100:.0f}%"]
     if bad:
         lines.append(f"- 类型不一致 {len(bad)} 条（前10）：")
-        for i, g, a in sorted(bad, reverse=True)[:10]:
+        for i, g, a in sorted(bad, key=lambda x: -x[0])[:10]:
             lines.append(f"  - [{sec2ts(g['_s'])}] 金:{g.get(type_col)} vs 自:{a.get(type_col)} (IoU {i:.2f})")
     return "\n".join(lines), res
 
@@ -86,12 +86,14 @@ def main():
     for sheet, tcol in sheet_cfg:
         g = pd.read_excel(args.gold, sheet_name=sheet)
         a = pd.read_excel(draft_x, sheet_name=sheet)
-        s0c, e0c = g.columns[2], g.columns[3]
+        s0c = next(c for c in g.columns if "开始" in str(c))
+        e0c = next(c for c in g.columns if "结束" in str(c))
         idc = g.columns[0]
         gold = [{"_s": sec(r[s0c]), "_e": sec(r[e0c]), "_id": str(r[idc]),
                  tcol: norm_type(r[tcol])} for _, r in g.iterrows()]
         auto = [{"_s": sec(r[s0c]), "_e": sec(r[e0c]), "_id": str(r[idc]),
-                 tcol: norm_type(r[tcol])} for _, r in a.iterrows()]
+                 tcol: norm_type(r[tcol]), "_tool": str(r["工具"]) if "工具" in a.columns else ""}
+                for _, r in a.iterrows()]
         txt, res = report(f"{sheet}级", gold, auto, tcol)
         out.append(txt); details[sheet] = res
 

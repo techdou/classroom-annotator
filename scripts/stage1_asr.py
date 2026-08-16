@@ -156,6 +156,8 @@ def main():
     ap.add_argument("--provider", default="DML")
     ap.add_argument("--noise-db", type=float, default=-38.0)
     ap.add_argument("--worker", action="store_true", help="内部：单进程转所有未完成段")
+    ap.add_argument("--patch", nargs=2, type=float, metavar=("START", "END"),
+                    help="补转指定秒区间（不做 VAD），合入进度后重合并")
     args = ap.parse_args()
 
     audio = (ORIG_CWD / args.audio).resolve() if not Path(args.audio).is_absolute() else Path(args.audio)
@@ -168,6 +170,36 @@ def main():
         ["ffprobe", "-v", "error", "-show_entries", "format=duration",
          "-of", "default=nw=1:nk=1", str(audio)],
         capture_output=True, text=True).stdout.strip())
+
+    if args.patch:
+        from oral_pipeline import build_config
+        from qwen_asr_gguf.inference import QwenASREngine, exporters
+        ps, pe = args.patch
+        cfg = build_config(str(MODEL_DIR), args.provider, args.n_ctx, args.chunk_size,
+                           memory_num=1, timestamp=True)
+        engine = QwenASREngine(config=cfg)
+        try:
+            base = out_dir / f"{Path(audio).stem}__{ps:08.2f}".replace(".", "_")
+            res = engine.transcribe(audio_file=str(audio), language="Chinese", context="",
+                                    start_second=ps, duration=pe - ps,
+                                    temperature=args.temperature)
+            plain = res.text.strip()
+            items = ([{"text": it.text, "start": it.start_time, "end": it.end_time}
+                      for it in res.alignment] if res.alignment else [])
+            if items and items[-1]["end"] < ps + 1:  # 相对切片 -> 全局偏移
+                for it in items:
+                    it["start"] += ps; it["end"] += ps
+            exporters.export_to_json(f"{base}.json", res)
+            done = load_progress(prog)
+            done[ps] = {"seg_start": ps, "seg_end": pe, "status": "ok",
+                        "chars": len(plain), "items": items, "text": plain}
+            save_progress(prog, done)
+            print(f"patch {ps}-{pe}s: {len(plain)}字 {plain[:80]!r}")
+        finally:
+            engine.shutdown()
+        merge_outputs(audio, out_dir, prog, load_progress(prog))
+        return
+
     segs = detect_speech_segments(audio, dur, noise_db=args.noise_db)
     print(f"音频 {dur:.0f}s -> {len(segs)} 有声段 (语音 {sum(e-s for s,e in segs):.0f}s)", flush=True)
 
