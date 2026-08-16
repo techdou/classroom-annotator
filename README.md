@@ -32,7 +32,9 @@ classroom-annotator/
 ├── SKILL.md                      # Skill 入口（Agent 读取的完整操作指令）
 ├── agents/openai.yaml            # Codex 等客户端的界面元数据
 ├── reference/
-│   └── fewshot_前10分钟.json      # 金标准同构的标注示例（匿名公开课，已脱敏）
+│   ├── annotation_rules.md       # 判定规则权威来源（金标准校准 R1-R4/RB1-RB2）
+│   ├── fewshot_前10分钟.json      # 金标准同构的标注示例（匿名公开课，已脱敏）
+│   └── 首测报告_澳大利亚课.md      # v1/v2/v3 三方评测基线与迭代教训
 └── scripts/
     ├── stage1_asr.py             # 本地 ASR 转录（调度器 + worker 进程隔离）
     ├── stage3_grid.py            # 抽帧拼 60s 窗口网格图
