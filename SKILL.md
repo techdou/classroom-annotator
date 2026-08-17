@@ -67,30 +67,48 @@ ffmpeg -y -v error -i <视频> -vf "fps=0.5,scale=960:-2" -q:v 3 "<课程名>/fr
 ### Stage 3 — 拼网格 + VLM 看帧（视觉事件检测）
 
 ```bash
-python scripts/stage3_grid.py --frames <课程名>/frames --out <课程名>/vlm
+python scripts/stage3_grid.py --frames <课程名>/frames --out <课程名>/vlm   # 默认 --thumb-w 960（v2 工艺）
 ```
 
-看帧路线二选一（按会话可用性）：
+看帧路线按会话可用性三选一：
 
-**首选：派 vision 子代理原生看图**（vision 本身是多模态模型，Read 图片直接进上下文，无需 MCP，无 30s 超时）。按 10-12 张/批派后台 vision 代理，指令要点：逐张 `Read` grid 图 → 原生看每帧教师位置/动作/屏幕黑板内容 → 帧间变化推断时间线 → Write 写 `vlm/events_w{XXX}.json`。注意：vision 代理类型注册自 `~/.zcode/agents/vision.md`，其工具清单改动要新会话才生效。
+**首选：主 agent 原生多模态直接看图**（2026-08-17 巴西课 v2 验证：46 窗 0 模板化、ASR 交叉验证全中）。主 agent 逐批 `Read` grid 图（4 张/批）→ 按下文 v2 工艺产出 events JSON。无需子代理、无 MCP 限流，多模态模型当会话即可用。
 
-**兜底：主 agent + zai MCP**（`mcp__zai-mcp-server__analyze_image`，本地路径直接传 image_source）。**全局并行 ≤ 2 个调用**（多了 30s 超时；失败重试一般第 2 次过；批量时最多 2 个后台代理）。
+**次选：派 vision 子代理原生看图**（vision 本身是多模态模型，Read 图片直接进上下文）。按 10-12 张/批派后台 vision 代理，指令要点：逐张 `Read` grid 图 → 原生看每帧教师位置/动作/屏幕黑板内容 → 帧间变化推断时间线 → Write 写 `vlm/events_w{XXX}.json`。注意：vision 代理类型注册自 `~/.zcode/agents/vision.md`，其工具清单改动要新会话才生效；派发失败就退回主 agent 路线。
 
-两种路线共用 prompt 模板：
+**兜底：zai MCP**（`mcp__zai-mcp-server__analyze_image`，本地路径直接传 image_source）。**全局并行 ≤ 2 个调用**（多了 30s 超时；当天限流约 1 小时后自行恢复）。该通道有模板化退化前科（巴西 v1 90% 套话），跑完必须过校验门禁。
 
-> 这是课堂视频网格截图，{学段学科}课{时间范围}的6帧（按时间顺序左上到右下，左上角黄色时间戳）。观察每帧教师位置（讲台前/黑板前/白板旁/学生座位间/画面外）、教师动作、屏幕或黑板显示内容，帧间对比推断动作时间线。输出JSON数组：{"start":"HH:MM:SS","end":"HH:MM:SS","action":"动作","location":"教师位置","screen":"屏幕/黑板内容","evidence":"画面证据描述"}。action从：书写/擦改/展示/指向/播放/使用电脑/演示/巡视/观察/站立讲述/静默/学生展示发言 中选。事件按start升序，相邻事件首尾相接。允许±10秒误差。只输出JSON。
+**v2 看帧工艺（三课核验教训固化，必守）**：
 
-**学术诚信红线**：视觉事件必须来自模型真实返回，没返回就标缺/重试/降级，不得凭转录文本"脑补"画面事件写进 events 文件。
+1. **逐帧原子标签，禁止窗级概括**：先对每帧独立回答四个原子问题——① 教师在不在画面？② 在什么位置？③ 在做什么动作？④ 屏幕/黑板是什么内容？有无学生站立/上台？——全部帧答完再合并相邻同状态帧成段。
+2. **三硬规则**：a) 教师某帧不可见就必须标 `教师不可见`（action 词表新增值，location=画面外），禁止用前后帧脑补动作；b) 学生起立作答、上台展示、屏幕前操作必须标 `学生展示发言`，不得记到教师头上；c) evidence 必须含该帧独有细节（屏幕文字、手势方向、镜头朝向），写不出细节就写"（不确定）"，禁止套话。
+3. **段长上限 20s**：窗内有变迁必须切段；"6 帧姿势不变"式合并段已被证伪（枚举算法 w038 漏巡视、塑造 w025 证据虚报）。
+4. **prompt 模板**：
 
-验收：`ls vlm/events_w*.json | wc -l` == 窗口数（grid_w 数量）。
+> 这是课堂视频网格截图，{学段学科}课的6帧（按时间顺序左上到右下，左上角黄色时间戳）。先逐帧独立回答：教师在不在画面（不在就标"教师不可见"，禁止脑补）？位置（讲台前/黑板前/学生座位间/画面外）？动作？屏幕/黑板内容（写出可读文字）？有无学生站立/上台（有则标"学生展示发言"）？再合并相邻同状态帧成段，单段≤20秒。输出JSON数组：{"start":"HH:MM:SS","end":"HH:MM:SS","action":"...","location":"...","screen":"...","evidence":"该帧独有细节（时间戳+所见）"}。action从：书写/擦改/展示/指向/播放/使用电脑/演示/巡视/观察/站立讲述/静默/学生展示发言/教师不可见 中选。事件按start升序、首尾相接、覆盖窗口全程（含窗口末帧到窗口结束）。只输出JSON。
+
+**学术诚信红线**：视觉事件必须来自模型真实返回/真实看图，没返回就标缺/重试/降级，不得凭转录文本"脑补"画面事件写进 events 文件。
+
+**版本化**：重标/迭代不覆盖 `vlm/events_w*.json` 根目录旧版，新版本写 `vlm/v<N>_<标签>/`（如 `vlm/v2_native/`），内含 events_w*.json + README.md（约定说明）；windows.json 沿用根目录。
+
+**校验门禁（不过不进 Stage 4）**：
+
+```bash
+python scripts/stage3_validate.py --course <课程名>                    # 校验 vlm/ 根目录
+python scripts/stage3_validate.py --vlm-dir <课程名>/vlm/v2_native     # 校验版本目录
+```
+
+检查：窗口齐全/六字段/无空洞重叠越界/覆盖率≥99%/模板化率≤10%/段长>20s 告警。PASS 才进 Stage 4（Stage 4 用 `--vlm-dir` 指向通过校验的目录）。
 
 ### Stage 4 — 三级标注推理（agent 自己做，这是"封装成 skill"的核心）
 
 **动手前先读 `reference/annotation_rules.md`**（金标准校准的判定规则 R1-R4/RB1-RB2，任务包内嵌 OP_RULES 是它的精简版）。Stage 4a 可再读 `reference/fewshot_前10分钟.json` 对齐金标准风格。
 
 ```bash
-python scripts/stage4_prep.py --course <课程名>     # 生成 llm/tasks/seg_*.md 任务包
+python scripts/stage4_prep.py --course <课程名> [--vlm-dir <课程名>/vlm/v2_native]   # 生成 llm/tasks/seg_*.md 任务包
 ```
+
+有重标版本（vlm/v2_native 等）时必须用 `--vlm-dir` 指向通过 stage3_validate 的目录，否则默认吃 vlm/ 根目录旧事件。
 
 任务包 = 每 5 分钟一段的「视觉事件时间线 + 逐句转录 + 操作规则速查」。然后 agent：
 
@@ -139,6 +157,7 @@ llm/ 根目录三 JSON 是 stage5/6 的默认输入，也是多会话/多轮迭�
 2. 无说话人分离——师生声音混在转录里，靠内容风格和画面推断，学生汇报段主体归属靠校对。
 3. 视觉边界 ±10s（VLM 窗口帧间隔），讲述/提问边界受 ASR 句聚合影响 ±2s。
 4. VLM 单帧动作分类偶有漂移（如把"围绕PPT讲述"标成"演示"），Stage 4 融合时按 annotation_rules.md 规则校正。
+5. **VLM 兜底通道有模板化退化前科**（巴西 v1：38/46 窗 evidence 只剩 5 句套话；四课核验详见 `E:\projects\打标\stage3_vlm_核验报告.md`）——stage3_validate 的模板化率检查就是为拦截这类退化，FAIL 的批次整批重跑，不要带病进 Stage 4。
 
 ## reference/ 索引（按需读取）
 

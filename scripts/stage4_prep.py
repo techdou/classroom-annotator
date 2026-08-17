@@ -89,13 +89,14 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--course", required=True, help="课程目录")
     ap.add_argument("--seg-min", type=int, default=5, help="任务包段长(分钟)")
+    ap.add_argument("--vlm-dir", help="视觉事件目录（默认 <课程名>/vlm；重标版本用 vlm/v2_native 等）")
     args = ap.parse_args()
     cdir = Path(args.course)
     cands = [p for p in (cdir / "transcripts").glob("*.json")
              if p.name != "_progress.json" and "__" not in p.stem]
     asr_json = max(cands, key=lambda p: p.stat().st_size)
     sents = load_sentences(asr_json)
-    evs = load_visual_events(cdir / "vlm")
+    evs = load_visual_events(Path(args.vlm_dir) if args.vlm_dir else cdir / "vlm")
     dur = max(sents[-1]["end"], evs[-1]["_e"] if evs else 0) if sents else 0
     seg_len = args.seg_min * 60
     n_seg = int(dur // seg_len) + 1

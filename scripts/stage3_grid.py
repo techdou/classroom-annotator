@@ -20,7 +20,7 @@ def main():
     ap.add_argument("--step", type=int, default=2, help="抽帧间隔秒")
     ap.add_argument("--window", type=int, default=60, help="窗口秒数")
     ap.add_argument("--per-window", type=int, default=6, help="每窗口帧数")
-    ap.add_argument("--thumb-w", type=int, default=640)
+    ap.add_argument("--thumb-w", type=int, default=960, help="单帧缩略宽度（960 比 640 更能看清后排教师动作，v2 工艺默认值）")
     args = ap.parse_args()
 
     frames_dir, out_dir = Path(args.frames), Path(args.out)
